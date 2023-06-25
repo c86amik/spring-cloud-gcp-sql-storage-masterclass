@@ -51,13 +51,14 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 </ol>
 
 #### Dummy JSON object
-* Body for the <strong>POST</strong> method to upload file in GCP Cloud Storage. For this method the body type is `form-data`. Provide the value in key-value pair concept from Postman. It takes the parameters in request parameter concept
+* Body for the <strong>POST</strong> method to upload file in GCP Cloud Storage. For this method the body type is `form-data`. Provide the value in key-value pair concept from Postman. It takes the parameters in request parameter concept.
 
 <code>"file" : "<Uplaod a file from your local system>"
 "name" : "Name of the file without extension"
 "fileName" : "Name of the file with extension"</code>
 
-* Body for the <strong>POST</strong> method to insert record in GCP Cloud SQL 
+* Body for the <strong>POST</strong> method to insert record in GCP Cloud SQL
+ 
 <code>{
 	"name" : "Test Name",
 	"mobileNo" : "1234567890",
@@ -66,6 +67,7 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 }</code>
 
 * Body for the <strong>PUT</strong> method to upload record in GCP Cloud SQL
+
 <code>{
 	"name" : "Test Name",
 	"mobileNo" : "1234567891",
