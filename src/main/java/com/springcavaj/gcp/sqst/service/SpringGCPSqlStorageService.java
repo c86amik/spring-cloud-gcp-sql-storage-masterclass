@@ -39,7 +39,8 @@ public class SpringGCPSqlStorageService {
 	@Value("${spring.cloud.gcp.project-id}")
 	private String gcpProjectId;
 	
-	@Value("${spring.cloud.gcp.bucket}")
+	//@Value("${spring.cloud.gcp.bucket}")
+	@Value("${spring.cloud.gcp.storage.bucket-name}")
 	private String gcpBucketId;
 
 	@Value("${spring.cloud.gcp.bucket.dir}")
@@ -49,6 +50,8 @@ public class SpringGCPSqlStorageService {
 	private SpringGCPSqlStorageRepository gcpSqlStorageRepository;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SpringGCPSqlStorageService.class);
+	
+	private final static String EMPTY_STRING = "";
 	
 	public FileDto uploadFileInGCP(MultipartFile file, String fileName, String contentType) throws ServerException {
 		try {
@@ -79,22 +82,44 @@ public class SpringGCPSqlStorageService {
 	}
 	
 	public UserSqlStorage saveUser(UserSqlStorage user) {
+		validateProfilePhotoAndUrl(user);
 		return gcpSqlStorageRepository.save(user);
+	}
+
+	private void validateProfilePhotoAndUrl(UserSqlStorage user) {
+		String profilePhotoName = StringUtils.hasText(user.getProfilePhoto()) ? user.getProfilePhoto() : EMPTY_STRING;
+		String profilPhotoURL = (StringUtils.hasText(profilePhotoName) && StringUtils.hasText(user.getProfileUrl())) ? user.getProfileUrl() : EMPTY_STRING;
+		if(StringUtils.hasText(profilePhotoName) && StringUtils.hasText(profilPhotoURL)) {
+			StorageOptions options = StorageOptions.newBuilder().setProjectId(gcpProjectId).build();
+			Storage storage = options.getService();
+			Blob blob = storage.get(gcpBucketId, user.getProfilePhoto());
+			if(null != blob) {
+				user.setProfilePhoto(blob.getName());
+				user.setProfileUrl(blob.getMediaLink());
+			} else {
+				user.setProfilePhoto(EMPTY_STRING);
+				user.setProfileUrl(EMPTY_STRING);
+			}
+		} else {
+			user.setProfilePhoto(profilePhotoName);
+			user.setProfileUrl(profilPhotoURL);
+		}
 	}
 	
 	public UserSqlStorage updateUser(String id, UserSqlStorage user) {
-		Long userId = Long.parseLong(id);
+		Integer userId = Integer.parseInt(id);
 		LOGGER.info("SpringGCPSqlStorageService -> updateUser() -> User Id is : {}", userId);
         UserSqlStorage model = gcpSqlStorageRepository.findById(userId)
         		.orElseThrow(() -> new SpringGCPSqlStorageException("User Record not found", id));
         if (null != model && model.getUserId() == user.getUserId()) {
+        	validateProfilePhotoAndUrl(user);
         	return gcpSqlStorageRepository.save(user);
 		}
         return model;
 	}
 	
 	public UserSqlStorage getUserById(String id) {
-		Long userId = Long.parseLong(id);
+		Integer userId = Integer.parseInt(id);
     	UserSqlStorage user = gcpSqlStorageRepository.findById(userId)
     			.orElseThrow(() -> new SpringGCPSqlStorageException("User Record not found", id));
     	LOGGER.info("SpringGCPSqlStorageService -> getUserById() -> Fetch the User Detail by userId as : {}", user);
@@ -102,7 +127,7 @@ public class SpringGCPSqlStorageService {
 	}
 	
 	public void deleteUserById(String id) {
-		Long userId = Long.parseLong(id);
+		Integer userId = Integer.parseInt(id);
 		UserSqlStorage user = gcpSqlStorageRepository.findById(userId)
 				.orElseThrow(() -> new SpringGCPSqlStorageException("User not found", id));
 		String profilePhotoName = user.getProfilePhoto();
@@ -118,6 +143,14 @@ public class SpringGCPSqlStorageService {
 			}
 		}
 		gcpSqlStorageRepository.delete(user);
+		LOGGER.info("SpringGCPSqlStorageController -> deleteUser() -> Delete the same profilePhoto and profileURL for other users");
+		List<UserSqlStorage> otherUsers = gcpSqlStorageRepository.findByProfilePhoto(profilePhotoName);
+		otherUsers.stream().forEach(otherUser -> {
+			otherUser.setProfilePhoto(EMPTY_STRING);
+			otherUser.setProfileUrl(EMPTY_STRING);
+			gcpSqlStorageRepository.save(otherUser);
+			LOGGER.info("SpringGCPSqlStorageController -> deleteUser() -> User having same profilePhoto and URL updated : {}", otherUser);
+		});
     	LOGGER.info("SpringGCPSqlStorageController -> deleteUser() -> Delete the User of userId : {}", user);
 	}
 	

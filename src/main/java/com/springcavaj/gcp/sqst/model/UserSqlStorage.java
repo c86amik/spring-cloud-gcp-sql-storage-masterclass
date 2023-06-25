@@ -33,7 +33,7 @@ public class UserSqlStorage implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id", nullable = false)
-	private Long userId;
+	private Integer userId;
 	@Column(name = "name", nullable = false)
 	private String name;
 	@Column(name = "mobile_no", nullable = false)
@@ -43,10 +43,10 @@ public class UserSqlStorage implements Serializable {
 	@Column(name = "profile_url", nullable = false)
 	private String profileUrl;
 	
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public String getName() {
