@@ -39,3 +39,37 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 * Right Click on the application, select the <strong>Run As</strong> option, and then select <strong>Spring Boot App</strong>
 * The application will start in the port <strong>7110</strong>
 * Open the Postman and test the REST Endpoints
+
+### Testing using Postman
+<ol>
+<li><strong>Upload Files in GCP Cloud Storage</strong> - localhost:7120/uploadFile</li>
+<li><strong>Save an User in GCP Cloud SQL</strong> - localhost:7120/saveUser</li>
+<li><strong>Update an User in GCP Cloud SQL</strong> - localhost:7120/updateUser/{id}. Here <strong>{id}</strong> is the id of the record stored in Cloud SQL</li>
+<li><strong>Delete an User from GCP Cloud SQL</strong> - localhost:7120/deleteUser/{id}</li>
+<li><strong>Get user by Id from Cloud SQL</strong> - localhost:7120/getUser/{id}</li>
+<li><strong>Get all users from Cloud SQL</strong> - localhost:7120/allUsers</li>
+</ol>
+
+#### Dummy JSON object
+* Body for the <strong>POST</strong> method to upload file in GCP Cloud Storage
+For this method the body type is `form-data`. Proviide the value in key-value pair concept from Postman.
+It takes the parameters in request parameter concept
+<code>
+"file" : "<Uplaod a file from your local system>"
+"name" : "Name of the file without extension"
+"fileName" : "Name of the file with extension"
+</code>
+* Body for the <strong>POST</strong> method to insert record in GCP Cloud SQL 
+<code>{
+	"name" : "Test Name",
+	"mobileNo" : "1234567890",
+	"profilePhoto" : "sqlstorage/test.png",
+	"profileUrl" : "https://storage.googleapis.com/download/storage/v1/b/gcp-sql-storage/o/sqlstorage%2Ftest.png?generation=1687665501945010&alt=media"
+}</code>
+* Body for the <strong>PUT</strong> method to upload record in GCP Cloud SQL
+<code>{
+	"name" : "Test Name",
+	"mobileNo" : "1234567891",
+	"profilePhoto" : "sqlstorage/test2.png",
+	"profileUrl" : "https://storage.googleapis.com/download/storage/v1/b/gcp-sql-storage/o/sqlstorage%2Ftest2.png?generation=1687665501945010&alt=media"
+}</code>
