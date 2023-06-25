@@ -54,11 +54,13 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 * Body for the <strong>POST</strong> method to upload file in GCP Cloud Storage
 For this method the body type is `form-data`. Proviide the value in key-value pair concept from Postman.
 It takes the parameters in request parameter concept
+
 <code>
 "file" : "<Uplaod a file from your local system>"
 "name" : "Name of the file without extension"
 "fileName" : "Name of the file with extension"
 </code>
+
 * Body for the <strong>POST</strong> method to insert record in GCP Cloud SQL 
 <code>{
 	"name" : "Test Name",
@@ -66,6 +68,7 @@ It takes the parameters in request parameter concept
 	"profilePhoto" : "sqlstorage/test.png",
 	"profileUrl" : "https://storage.googleapis.com/download/storage/v1/b/gcp-sql-storage/o/sqlstorage%2Ftest.png?generation=1687665501945010&alt=media"
 }</code>
+
 * Body for the <strong>PUT</strong> method to upload record in GCP Cloud SQL
 <code>{
 	"name" : "Test Name",
