@@ -55,11 +55,9 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 For this method the body type is `form-data`. Proviide the value in key-value pair concept from Postman.
 It takes the parameters in request parameter concept
 
-<code>
-"file" : "<Uplaod a file from your local system>"
+<code>"file" : "<Uplaod a file from your local system>"
 "name" : "Name of the file without extension"
-"fileName" : "Name of the file with extension"
-</code>
+"fileName" : "Name of the file with extension"</code>
 
 * Body for the <strong>POST</strong> method to insert record in GCP Cloud SQL 
 <code>{
