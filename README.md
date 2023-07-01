@@ -13,6 +13,13 @@
 * [Google Cloud SQL Proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy#install) - Cloud SQL Proxy as required to connect with Cloud SQL locally
 * [Postman](https://www.postman.com/downloads/)
 
+### Steps to execute Google Cloud SDK
+* Install Google Cloud SDK
+* After successful installation open the Cloud SDK
+* Run the command as `gcloud auth application-default login`
+* It will open your default browser and authorize the google account that you have used in Google Cloud Console to configure the services
+* After that it will store the <strong>application_default_credentials.json</strong> file in your local drive.
+
 ### Steps to execute the DB Scripts
 Run the below scripts in any of the software either in MySQL Workbench or in SQLYog or in DBeaver
 
@@ -26,6 +33,7 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 * hibernate_sequence.sql - It will create the table <strong>hibernate_sequence</strong> under <strong>sql-storage</strong> schema
 
 ### Steps to clone and run the application
+* Follow the steps to install and configure [Google Cloud SDK](https://github.com/c86amik/spring-cloud-gcp-sql-storage-masterclass#steps-to-execute-google-cloud-sdk) with your Google account in your local machine. So that your local machine can connect with Gogole Cloud Components.
 * Install MySQL. Complete installation steps of [MySQL Workbench](https://www.sqlshack.com/how-to-install-mysql-database-server-8-0-19-on-windows-10/) are provided
 * If you face any problem while installing MySQL Workbench, then you can install SQLYog / DBeaver as mentioned in the Software Required steps
 * Open Git Bash or even you can open Command Prompt (if you are using Windows) or Terminal (if you are using MAC) in your machine
