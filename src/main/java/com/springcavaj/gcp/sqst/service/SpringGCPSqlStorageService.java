@@ -59,9 +59,8 @@ public class SpringGCPSqlStorageService {
 			byte[] fileData = FileUtils.readFileToByteArray(convertFileToByteArray(file));
 			StorageOptions options = StorageOptions.newBuilder().setProjectId(gcpProjectId).build();
 			Storage storage = options.getService();
-			Blob blob = null;
 			Bucket bucket = storage.get(gcpBucketId, Storage.BucketGetOption.fields());
-			blob = bucket.create(gcpBucketDirectoryName + "/" + fileName, fileData, contentType);
+			Blob blob = bucket.create(gcpBucketDirectoryName + "/" + fileName, fileData, contentType);
 			if(null != blob) {
 				LOGGER.info("SpringGCPSqlStorageService -> uploadFileInGCP() -> File Successfully uyploaded in GCP Cloud Storage.");
 				LOGGER.info("SpringGCPSqlStorageService -> uploadFileInGCP() -> Media File Name : {}, Media Link URL : {} and fileName : {}", 
