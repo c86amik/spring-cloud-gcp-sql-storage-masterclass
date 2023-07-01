@@ -51,9 +51,9 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 ### Testing using Postman
 <ol>
 <li><strong>Upload Files in GCP Cloud Storage</strong> - localhost:7120/uploadFile</li>
-<li><strong>Save an User in GCP Cloud SQL</strong> - localhost:7120/saveUser</li>
-<li><strong>Update an User in GCP Cloud SQL</strong> - localhost:7120/updateUser/{id}. Here <strong>{id}</strong> is the id of the record stored in Cloud SQL</li>
-<li><strong>Delete an User from GCP Cloud SQL</strong> - localhost:7120/deleteUser/{id}</li>
+<li><strong>Save a User in GCP Cloud SQL</strong> - localhost:7120/saveUser</li>
+<li><strong>Update a User in GCP Cloud SQL</strong> - localhost:7120/updateUser/{id}. Here <strong>{id}</strong> is the id of the record stored in Cloud SQL</li>
+<li><strong>Delete a User from GCP Cloud SQL</strong> - localhost:7120/deleteUser/{id}</li>
 <li><strong>Get user by Id from Cloud SQL</strong> - localhost:7120/getUser/{id}</li>
 <li><strong>Get all users from Cloud SQL</strong> - localhost:7120/allUsers</li>
 </ol>
@@ -77,6 +77,7 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 * Body for the <strong>PUT</strong> method to upload record in GCP Cloud SQL
 
 <code>{
+	"userId" : 1,
 	"name" : "Test Name",
 	"mobileNo" : "1234567891",
 	"profilePhoto" : "sqlstorage/test2.png",
