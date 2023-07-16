@@ -45,7 +45,7 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 * Run the command as `cloud-sql-proxy --port 3307 spring-gcp-sql-storage:asia-south1:gcp-sql-storage`. Here, I have used the port no `3307` as `3306` is occupied by local MySQL. And `spring-gcp-sql-storage:asia-south1:gcp-sql-storage` is the connection string of Cloud SQL. Nomenclature of the Cloud SQL connection is `projectId:region:instanceId`
 * Execute the SQL scripts as mentioned in the above [DB Script](https://github.com/c86amik/spring-cloud-gcp-sql-storage-masterclass#steps-to-execute-the-db-scripts) execution steps
 * Right Click on the application, select the <strong>Run As</strong> option, and then select <strong>Spring Boot App</strong>
-* The application will start in the port <strong>7110</strong>
+* The application will start in the port <strong>7120</strong>
 * Open the Postman and test the REST Endpoints
 
 ### Testing using Postman
