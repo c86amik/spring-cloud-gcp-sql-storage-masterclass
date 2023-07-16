@@ -50,16 +50,16 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 
 ### Testing using Postman
 <ol>
-<li><strong>Upload Files in GCP Cloud Storage</strong> - localhost:7120/uploadFile</li>
-<li><strong>Save a User in GCP Cloud SQL</strong> - localhost:7120/saveUser</li>
-<li><strong>Update a User in GCP Cloud SQL</strong> - localhost:7120/updateUser/{id}. Here <strong>{id}</strong> is the id of the record stored in Cloud SQL</li>
-<li><strong>Delete a User from GCP Cloud SQL</strong> - localhost:7120/deleteUser/{id}</li>
-<li><strong>Get user by Id from Cloud SQL</strong> - localhost:7120/getUser/{id}</li>
-<li><strong>Get all users from Cloud SQL</strong> - localhost:7120/allUsers</li>
+<li><strong>Upload Files in Google Cloud Storage</strong> - localhost:7120/uploadFile</li>
+<li><strong>Save a User in Google Cloud SQL</strong> - localhost:7120/saveUser</li>
+<li><strong>Update a User in Google Cloud SQL</strong> - localhost:7120/updateUser/{id}. Here <strong>{id}</strong> is the id of the record stored in Cloud SQL</li>
+<li><strong>Delete a User from Google Cloud SQL</strong> - localhost:7120/deleteUser/{id}</li>
+<li><strong>Get user by Id from Google Cloud SQL</strong> - localhost:7120/getUser/{id}</li>
+<li><strong>Get all users from Google Cloud SQL</strong> - localhost:7120/allUsers</li>
 </ol>
 
 #### Dummy JSON object
-* Body for the <strong>POST</strong> method to upload file in GCP Cloud Storage. For this method the body type is `form-data`. Provide the value in key-value pair concept from Postman. It takes the parameters in request parameter concept.
+* Body for the <strong>POST</strong> method to upload file in Google Cloud Storage. For this method the body type is `form-data`. Provide the value in key-value pair concept from Postman. It takes the parameters in request parameter concept.
 
 <code>"file" : "<Uplaod a file from your local system>"
 "name" : "Name of the file without extension"
@@ -74,7 +74,7 @@ There is no sequencing that you have to run first the `hibernate_sequence.sql` a
 	"profileUrl" : "https://storage.googleapis.com/download/storage/v1/b/gcp-sql-storage/o/sqlstorage%2Ftest.png?generation=1687665501945010&alt=media"
 }</code>
 
-* Body for the <strong>PUT</strong> method to upload record in GCP Cloud SQL
+* Body for the <strong>PUT</strong> method to upload record in Google Cloud SQL
 
 <code>{
 	"userId" : 1,
